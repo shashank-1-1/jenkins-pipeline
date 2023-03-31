@@ -8,6 +8,6 @@ WORKDIR pipeline/
 
 RUN mvn clean install
 
-EXPOSE 9090
+EXPOSE 8090
 
 ENTRYPOINT [ "java", "-jar", "/pipeline/target/jenkins-pipeline.jar"]
