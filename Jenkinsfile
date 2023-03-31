@@ -38,8 +38,8 @@ node {
     stage('Push to Docker Registry'){
         withCredentials([string(credentialsId: '799233', variable: 'docker')]) {
             sh 'docker login -u 799233 -p ${docker}'
-            pushToImage(CONTAINER_NAME, CONTAINER_TAG)
         }
+        sh  'docker push 799233/jenkins-pipeline:latest'
     }
 
     stage('Run App'){
