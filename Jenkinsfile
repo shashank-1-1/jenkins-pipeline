@@ -36,9 +36,7 @@ node {
     }
 
     stage('Push to Docker Registry'){
-        withCredentials([string(credentialsId: '799233', variable: 'docker')]) {
-            sh 'docker login -u 799233 -p ${docker}'
-        }
+        withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
             pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
         }
     
