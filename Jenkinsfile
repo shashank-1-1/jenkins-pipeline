@@ -36,11 +36,10 @@ node {
     }
 
     stage('Push to Docker Registry'){
-        withCredentials([string(credentialsId: '799233', variable: 'docker')]) {
-            sh 'docker login -u 799233 -p ${docker}'
-        }
-        sh  'docker push 799233/jenkins-pipeline:latest'
+    withCredentials([usernamePassword(credentialsId: 'dockerHubAccount', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+        pushToImage(CONTAINER_NAME, CONTAINER_TAG, USERNAME, PASSWORD)
     }
+}
 
     stage('Run App'){
         runApp(CONTAINER_NAME, CONTAINER_TAG, DOCKER_HUB_USER, HTTP_PORT)
